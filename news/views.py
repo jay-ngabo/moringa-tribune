@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http  import HttpResponse
 import datetime as dt
 from django.shortcuts import render, redirect
+from .models import Article
 
 
 
@@ -63,6 +64,11 @@ def convert_dates(dates):
     # Returning the actual day of the week
     day = days[day_number]
     return day
+def news_today(request):
+    date = dt.date.today()
+    news = Article.todays_news()
+    return render(request, 'all-news/today-news.html', {"date": date,"news":news})
+
 
 
 
